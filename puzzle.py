@@ -111,9 +111,10 @@ class Node:
 
 
 def create_arbol_dot(raiz, img_ext="png"):
-    print("Creando tablero.dot ...")
+    filename = "arbol-busqueda"
+    print(f"Creando {filename}.dot ...")
     cola = [raiz]
-    with open("tablero.dot", "w") as dot_file:
+    with open(f"{filename}.dot", "w") as dot_file:
         dot_file.write("digraph {\nnode [shape=record];\n")
     
     while cola:
@@ -123,14 +124,14 @@ def create_arbol_dot(raiz, img_ext="png"):
             graph_text += child.get_graphviz_label()
             graph_text += f'"{nodo.name}" -> "{child.name}";\n'
             cola.append(child)
-        with open("tablero.dot", "a") as dot_file:
+        with open(f"{filename}.dot", "a") as dot_file:
             dot_file.write(graph_text)
     
-    with open("tablero.dot", "a") as dot_file:
+    with open(f"{filename}.dot", "a") as dot_file:
         dot_file.write("\n}")
     
-    print("Creando tablero.png ...")
-    os.system(f"dot -T{img_ext} tablero.dot -o tablero.{img_ext}")
+    print(f"Creando {filename}.{img_ext} ...")
+    os.system(f"dot -T{img_ext} {filename}.dot -o {filename}.{img_ext}")
 
 def create_solucion_dot(nodo):
 
